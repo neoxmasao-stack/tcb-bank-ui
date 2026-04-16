@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
-  images: { unoptimized: true },
-  output: 'standalone'
+  experimental: {
+    turbopack: {
+      root: '.',
+    },
+  },
+  // Cloudflare Pages 互換性設定
+  output: 'standalone',
 };
 export default nextConfig;
