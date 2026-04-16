@@ -1,11 +1,12 @@
 name = "tcb-bank-ui"
-main = ".open-next/worker.js"
 compatibility_date = "2026-04-16"
 compatibility_flags = ["nodejs_compat"]
 
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
+# Pages用設定
+pages_build_output_dir = ".open-next/assets"
 
-[observability]
-enabled = true
+# D1 Binding
+[[d1_databases]]
+binding = "LEDGER_DB"
+database_name = "tcb-ledger-v2"
+database_id = "7c86e16f-67fd-4730-a74e-2536ed824b77"
