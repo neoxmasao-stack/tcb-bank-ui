@@ -1,7 +1,6 @@
-node_modules
 .next
-out
-.env.local
+.open-next
+node_modules
 .wrangler
-dist
-.vercel
+*.log
+.DS_Store
