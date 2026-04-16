@@ -9,18 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "autoprefixer": "^10.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.8.0",
     "next": "16.2.4",
+    "postcss": "^8.5.10",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest",
-    "clsx": "latest",
-    "tailwind-merge": "latest"
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2",
+    "tcb-portal": "file:../../.."
   },
   "devDependencies": {
-    "typescript": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "typescript": "latest",
     "wrangler": "latest"
   }
 }
