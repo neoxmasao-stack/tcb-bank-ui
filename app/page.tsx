@@ -35,7 +35,7 @@ export default function SClassPrivateBankUI() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* 送金セクション */}
           <Dialog>
-            <DialogTrigger asChild>
+            <DialogTrigger >
               <Card className="bg-gradient-to-br from-zinc-900 to-black border-zinc-800 h-56 flex flex-col items-center justify-center cursor-pointer hover:border-emerald-500 transition-all shadow-2xl">
                 <Send className="w-16 h-16 mb-6 text-emerald-500" />
                 <span className="text-2xl font-bold">送金実行</span>
@@ -61,7 +61,7 @@ export default function SClassPrivateBankUI() {
 
           {/* 物理移動セクション */}
           <Dialog>
-            <DialogTrigger asChild>
+            <DialogTrigger >
               <Card className="bg-gradient-to-br from-zinc-900 to-black border-zinc-800 h-56 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition-all shadow-2xl">
                 <Package className="w-16 h-16 mb-6 text-amber-500" />
                 <span className="text-2xl font-bold">物理移動</span>
@@ -88,4 +88,5 @@ export default function SClassPrivateBankUI() {
     </div>
   );
 }
+
 

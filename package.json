@@ -1,13 +1,13 @@
 {
   "name": "tcb-bank-ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
     "build": "next build",
-    "deploy": "opennextjs-cloudflare build && wrangler pages deploy .open-next/assets"
+    "deploy": "npm run build && npx @opennextjs/cloudflare build && npx wrangler pages deploy .open-next/assets --project-name tcb-bank-ui"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.0",
