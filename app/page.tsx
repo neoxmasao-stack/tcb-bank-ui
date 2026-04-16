@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Send, Package, CreditCard } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function SimpleTCB() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,14 +60,30 @@ export default function SimpleTCB() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#0a0f1c] flex items-center justify-center">
-        <Card className="w-full max-w-md bg-[#111827] p-10 border border-cyan-500/30">
+      <div className="min-h-screen bg-[#0a0f1c] flex items-center justify-center p-6">
+        <div className="bg-[#111827] border border-cyan-500/30 p-10 rounded-2xl w-full max-w-md">
           <h1 className="text-4xl font-bold text-center mb-2">Tsukayama Century Bank</h1>
           <p className="text-cyan-400 text-center mb-8">S-Class Private Banking</p>
-          <Input placeholder="ID" value={loginId} onChange={e => setLoginId(e.target.value)} className="mb-4" />
-          <Input type="password" placeholder="Password" value={loginPw} onChange={e => setLoginPw(e.target.value)} className="mb-6" />
-          <Button onClick={handleLogin} className="w-full h-12 bg-cyan-600">ログイン</Button>
-        </Card>
+          <input 
+            placeholder="ID" 
+            value={loginId} 
+            onChange={e => setLoginId(e.target.value)} 
+            className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-4 text-white"
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={loginPw} 
+            onChange={e => setLoginPw(e.target.value)} 
+            className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-6 text-white"
+          />
+          <button 
+            onClick={handleLogin} 
+            className="w-full h-12 bg-cyan-600 hover:bg-cyan-500 text-white rounded"
+          >
+            ログイン
+          </button>
+        </div>
       </div>
     );
   }
@@ -80,47 +92,72 @@ export default function SimpleTCB() {
     <div className="min-h-screen bg-[#0a0f1c] text-white p-8">
       <div className="max-w-2xl mx-auto text-center">
         <div className="mb-12">
-          <div className="text-cyan-400">総資産</div>
+          <div className="text-cyan-400 text-sm">総資産</div>
           <div className="text-6xl font-mono font-bold text-cyan-300">¥{totalAssets.toLocaleString()}</div>
         </div>
 
         <div className="grid grid-cols-3 gap-6">
           <Dialog>
             <DialogTrigger>
-              <Card className="bg-gradient-to-br from-emerald-600 to-teal-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110">
+              <div className="bg-gradient-to-br from-emerald-600 to-teal-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
                 <Send className="w-16 h-16 mb-6" />
                 <span className="text-2xl font-bold">送金</span>
-              </Card>
+              </div>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-[#111827] border border-cyan-500/30">
               <DialogHeader><DialogTitle>送金</DialogTitle></DialogHeader>
-              <Input placeholder="送金先" value={sendTo} onChange={e => setSendTo(e.target.value)} className="mb-3" />
-              <Input type="number" placeholder="金額" value={sendAmount} onChange={e => setSendAmount(e.target.value)} />
-              <Button onClick={executeSend} className="w-full">送金する</Button>
-              {sendStatus && <p className="text-center mt-4">{sendStatus}</p>}
+              <input 
+                placeholder="送金先" 
+                value={sendTo} 
+                onChange={e => setSendTo(e.target.value)} 
+                className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-4 text-white"
+              />
+              <input 
+                type="number" 
+                placeholder="金額" 
+                value={sendAmount} 
+                onChange={e => setSendAmount(e.target.value)} 
+                className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-4 text-white"
+              />
+              <button onClick={executeSend} className="w-full h-12 bg-emerald-600 text-white rounded">
+                今すぐ送金
+              </button>
+              {sendStatus && <p className="text-center mt-4 text-emerald-400">{sendStatus}</p>}
             </DialogContent>
           </Dialog>
 
           <Dialog>
             <DialogTrigger>
-              <Card className="bg-gradient-to-br from-amber-600 to-orange-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110">
+              <div className="bg-gradient-to-br from-amber-600 to-orange-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
                 <Package className="w-16 h-16 mb-6" />
                 <span className="text-2xl font-bold">物理移動</span>
-              </Card>
+              </div>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-[#111827] border border-cyan-500/30">
               <DialogHeader><DialogTitle>物理移動</DialogTitle></DialogHeader>
-              <Input placeholder="移動元" value={moveFrom} onChange={e => setMoveFrom(e.target.value)} className="mb-3" />
-              <Input placeholder="移動先" value={moveTo} onChange={e => setMoveTo(e.target.value)} />
-              <Button onClick={executeMove} className="w-full">実行</Button>
-              {moveStatus && <p className="text-center mt-4">{moveStatus}</p>}
+              <input 
+                placeholder="移動元" 
+                value={moveFrom} 
+                onChange={e => setMoveFrom(e.target.value)} 
+                className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-4 text-white"
+              />
+              <input 
+                placeholder="移動先" 
+                value={moveTo} 
+                onChange={e => setMoveTo(e.target.value)} 
+                className="w-full p-4 bg-[#1f2937] border border-gray-600 rounded mb-4 text-white"
+              />
+              <button onClick={executeMove} className="w-full h-12 bg-amber-600 text-white rounded">
+                実行
+              </button>
+              {moveStatus && <p className="text-center mt-4 text-emerald-400">{moveStatus}</p>}
             </DialogContent>
           </Dialog>
 
-          <Card onClick={() => alert("バーチャルカード発行完了")} className="bg-gradient-to-br from-violet-600 to-purple-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110">
+          <div onClick={() => alert("✅ バーチャルカードを発行しました")} className="bg-gradient-to-br from-violet-600 to-purple-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
             <CreditCard className="w-16 h-16 mb-6" />
             <span className="text-2xl font-bold">バーチャルカード</span>
-          </Card>
+          </div>
         </div>
       </div>
     </div>

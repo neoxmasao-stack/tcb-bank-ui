@@ -36,5 +36,6 @@
     "@types/react-dom": "latest",
     "typescript": "latest",
     "wrangler": "latest"
-  }
+  },
+  "type": "module"
 }
