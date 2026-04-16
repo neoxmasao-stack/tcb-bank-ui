@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Send, Package, CreditCard } from "lucide-react";
 
-export default function SimpleUI() {
+export default function TCBUI() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginId, setLoginId] = useState("");
   const [loginPw, setLoginPw] = useState("");
@@ -40,26 +40,26 @@ export default function SimpleUI() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="bg-zinc-900 p-10 rounded-2xl border border-zinc-700 w-full max-w-md">
-          <h1 className="text-4xl font-bold text-white text-center mb-2">Tsukayama Century Bank</h1>
-          <p className="text-emerald-400 text-center mb-8">S-Class Private Banking</p>
+      <div className="min-h-screen bg-black flex items-center justify-center p-6">
+        <div className="bg-zinc-900 border border-zinc-700 p-10 rounded-3xl w-full max-w-md">
+          <h1 className="text-4xl font-bold text-white text-center mb-3">Tsukayama Century Bank</h1>
+          <p className="text-emerald-400 text-center mb-10">S-Class Private Banking</p>
           <input 
             placeholder="ID" 
             value={loginId} 
             onChange={e => setLoginId(e.target.value)} 
-            className="w-full p-4 bg-zinc-800 border border-zinc-700 rounded mb-4 text-white"
+            className="w-full p-4 bg-zinc-800 border border-zinc-700 rounded-xl mb-4 text-white placeholder-zinc-500"
           />
           <input 
             type="password" 
             placeholder="Password" 
             value={loginPw} 
             onChange={e => setLoginPw(e.target.value)} 
-            className="w-full p-4 bg-zinc-800 border border-zinc-700 rounded mb-6 text-white"
+            className="w-full p-4 bg-zinc-800 border border-zinc-700 rounded-xl mb-8 text-white placeholder-zinc-500"
           />
           <button 
             onClick={handleLogin} 
-            className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded"
+            className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-2xl"
           >
             ログイン
           </button>
@@ -71,30 +71,35 @@ export default function SimpleUI() {
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-2xl mx-auto text-center">
-        <div className="mb-12">
-          <div className="text-emerald-400 text-sm">総資産</div>
-          <div className="text-6xl font-mono font-bold text-emerald-400">¥{totalAssets.toLocaleString()}</div>
+        <div className="mb-16">
+          <div className="text-emerald-400 text-sm tracking-widest">総資産</div>
+          <div className="text-7xl font-mono font-bold text-emerald-400">¥{totalAssets.toLocaleString()}</div>
         </div>
 
         <div className="grid grid-cols-3 gap-6">
-          <div onClick={executeSend} className="bg-gradient-to-br from-emerald-600 to-teal-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
+          <button 
+            onClick={executeSend}
+            className="bg-gradient-to-br from-emerald-600 to-teal-700 h-56 flex flex-col items-center justify-center rounded-3xl hover:brightness-110 transition-all"
+          >
             <Send className="w-16 h-16 mb-6" />
             <span className="text-2xl font-bold">送金</span>
-          </div>
+          </button>
 
-          <div onClick={executeMove} className="bg-gradient-to-br from-amber-600 to-orange-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
+          <button 
+            onClick={executeMove}
+            className="bg-gradient-to-br from-amber-600 to-orange-700 h-56 flex flex-col items-center justify-center rounded-3xl hover:brightness-110 transition-all"
+          >
             <Package className="w-16 h-16 mb-6" />
             <span className="text-2xl font-bold">物理移動</span>
-          </div>
+          </button>
 
-          <div onClick={() => alert("✅ バーチャルカードを発行しました")} className="bg-gradient-to-br from-violet-600 to-purple-700 h-56 flex flex-col items-center justify-center cursor-pointer hover:brightness-110 rounded-2xl">
+          <button 
+            onClick={() => alert("✅ バーチャルカードを発行しました")}
+            className="bg-gradient-to-br from-violet-600 to-purple-700 h-56 flex flex-col items-center justify-center rounded-3xl hover:brightness-110 transition-all"
+          >
             <CreditCard className="w-16 h-16 mb-6" />
             <span className="text-2xl font-bold">バーチャルカード</span>
-          </div>
-        </div>
-
-        <div className="mt-12 text-sm text-gray-500">
-          送金先を入力してボタンを押すと反応します
+          </button>
         </div>
       </div>
     </div>
