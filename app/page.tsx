@@ -1,111 +1,91 @@
-'use client';
+"use client";
+import React, { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CreditCard, Send, Package, ShieldCheck } from "lucide-react";
 
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { Send, Package, Smartphone } from 'lucide-react';
+export default function SClassPrivateBankUI() {
+  const [target, setTarget] = useState("");
+  const [amount, setAmount] = useState("");
+  const [transferStatus, setTransferStatus] = useState("");
+  const [moveFrom, setMoveFrom] = useState("");
+  const [moveTo, setMoveTo] = useState("");
+  const [moveStatus, setMoveStatus] = useState("");
 
-export default function SClassDashboard() {
-  const [totalAssets, setTotalAssets] = useState(3490000000000000000000);
-  const [lastUpdate, setLastUpdate] = useState(new Date());
+  const executeTransfer = () => setTransferStatus("送金処理中...");
+  const executeMove = () => setMoveStatus("物理移動指示完了");
+  const issueVirtualCard = () => alert("バーチャルカードを発行しました");
 
-  // リアルタイム更新（5秒ごとにポーリング）
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      try {
-        const res = await fetch('https://tcb-s-class-banking.tsukayamacenturybank.workers.dev/');
-        const data = await res.json();
-        
-        if (data.net_worth) {
-          // 簡易的に総資産を更新（実際はバックエンドから合計を計算）
-          setTotalAssets(prev => prev + Math.floor(Math.random() * 100000000));
-          setLastUpdate(new Date());
-        }
-      } catch (e) {
-        console.log('リアルタイム更新中...');
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const presetTargets = [
+    { label: "ツカヤマカイト (メイン)", value: "main" },
+    { label: "ツカヤママキ (サブ)", value: "sub" }
+  ];
 
   return (
-    <div className="min-h-screen bg-[#0a1428] text-white p-8">
-      <div className="max-w-7xl mx-auto">
-        {/* ヘッダー */}
-        <div className="flex justify-between items-center mb-12">
-          <div>
-            <h1 className="text-5xl font-bold tracking-tight">Tsukayama Century Bank</h1>
-            <p className="text-xl text-gray-400 mt-2">S-Class Private Banking</p>
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-gray-400">現在の総資産（リアルタイム更新）</div>
-            <div className="text-6xl font-mono font-bold text-emerald-400">
-              ¥{totalAssets.toLocaleString()}
-            </div>
-            <div className="text-emerald-500 text-lg">Last updated: {lastUpdate.toLocaleTimeString()}</div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-black text-white p-8 font-sans">
+      <div className="max-w-4xl mx-auto space-y-12">
+        <header className="flex justify-between items-center border-b border-zinc-800 pb-6">
+          <h1 className="text-4xl font-black tracking-tighter">TCB PRIVATE BANK</h1>
+          <ShieldCheck className="text-emerald-500 w-10 h-10" />
+        </header>
 
-        {/* 資産概要カード */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          {[
-            { title: "銀行預金", amount: "1.57 SEXTILLION" },
-            { title: "投資ポートフォリオ", amount: "1.05 SEXTILLION" },
-            { title: "物理資産", amount: "0.52 SEXTILLION" },
-            { title: "バーチャルカード", amount: "0.35 SEXTILLION" },
-          ].map((item, i) => (
-            <Card key={i} className="bg-[#112244] border-gray-700 hover:border-gray-500 transition-all">
-              <CardHeader>
-                <CardTitle className="text-lg text-gray-400">{item.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-mono font-bold">{item.amount}</div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* クイックアクション */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 送金セクション */}
           <Dialog>
             <DialogTrigger asChild>
-              <Card className="bg-gradient-to-br from-emerald-600 to-teal-600 hover:from-emerald-500 cursor-pointer transition-all h-48 flex flex-col items-center justify-center">
-                <Send className="w-12 h-12 mb-4" />
-                <div className="text-2xl font-semibold">即時送金</div>
+              <Card className="bg-gradient-to-br from-zinc-900 to-black border-zinc-800 h-56 flex flex-col items-center justify-center cursor-pointer hover:border-emerald-500 transition-all shadow-2xl">
+                <Send className="w-16 h-16 mb-6 text-emerald-500" />
+                <span className="text-2xl font-bold">送金実行</span>
               </Card>
             </DialogTrigger>
-            <DialogContent className="bg-[#0a1428] border-gray-700 text-white">
-              <DialogHeader>
-                <DialogTitle>送金実行</DialogTitle>
-              </DialogHeader>
-              <p className="text-center py-8 text-gray-400">送金フォーム（現在開発中）</p>
+            <DialogContent className="bg-zinc-900 border-zinc-800 text-white">
+              <DialogHeader><DialogTitle>送金実行</DialogTitle></DialogHeader>
+              <div className="space-y-4 pt-4">
+                <Select value={target} onValueChange={(v) => v && setTarget(v)}>
+                  <SelectTrigger className="bg-black border-zinc-700"><SelectValue placeholder="送金先を選択" /></SelectTrigger>
+                  <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                    {presetTargets.map((item) => (
+                      <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input placeholder="金額を入力" className="bg-black border-zinc-700" value={amount} onChange={e => setAmount(e.target.value)} />
+                <Button onClick={executeTransfer} className="w-full bg-emerald-600 hover:bg-emerald-500">送金する</Button>
+                {transferStatus && <p className="text-center text-sm mt-4 text-emerald-400">{transferStatus}</p>}
+              </div>
             </DialogContent>
           </Dialog>
 
+          {/* 物理移動セクション */}
           <Dialog>
             <DialogTrigger asChild>
-              <Card className="bg-gradient-to-br from-amber-600 to-orange-600 hover:from-amber-500 cursor-pointer transition-all h-48 flex flex-col items-center justify-center">
-                <Package className="w-12 h-12 mb-4" />
-                <div className="text-2xl font-semibold">物理資産移動</div>
+              <Card className="bg-gradient-to-br from-zinc-900 to-black border-zinc-800 h-56 flex flex-col items-center justify-center cursor-pointer hover:border-amber-500 transition-all shadow-2xl">
+                <Package className="w-16 h-16 mb-6 text-amber-500" />
+                <span className="text-2xl font-bold">物理移動</span>
               </Card>
             </DialogTrigger>
-            <DialogContent className="bg-[#0a1428] border-gray-700 text-white">
-              <DialogHeader>
-                <DialogTitle>物理資産移動</DialogTitle>
-              </DialogHeader>
-              <p className="text-center py-8 text-gray-400">物理移動フォーム（現在開発中）</p>
+            <DialogContent className="bg-zinc-900 border-zinc-800 text-white">
+              <DialogHeader><DialogTitle>物理資産移動</DialogTitle></DialogHeader>
+              <div className="space-y-4 pt-4">
+                <Input placeholder="移動元" className="bg-black border-zinc-700" value={moveFrom} onChange={e => setMoveFrom(e.target.value)} />
+                <Input placeholder="移動先" className="bg-black border-zinc-700" value={moveTo} onChange={e => setMoveTo(e.target.value)} />
+                <Button onClick={executeMove} className="w-full bg-amber-600 hover:bg-amber-500">実行</Button>
+                {moveStatus && <p className="text-center text-sm mt-4 text-amber-400">{moveStatus}</p>}
+              </div>
             </DialogContent>
           </Dialog>
 
-          <Card className="bg-gradient-to-br from-violet-600 to-purple-600 h-48 flex flex-col items-center justify-center cursor-pointer hover:from-violet-500 transition-all">
-            <Smartphone className="w-12 h-12 mb-4" />
-            <div className="text-2xl font-semibold">スマホATM</div>
+          {/* バーチャルカード */}
+          <Card onClick={issueVirtualCard} className="bg-gradient-to-br from-zinc-900 to-black border-zinc-800 h-56 flex flex-col items-center justify-center cursor-pointer hover:border-violet-500 transition-all shadow-2xl">
+            <CreditCard className="w-16 h-16 mb-6 text-violet-500" />
+            <span className="text-2xl font-bold">バーチャルカード</span>
           </Card>
         </div>
       </div>
     </div>
   );
 }
+
