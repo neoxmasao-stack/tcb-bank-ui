@@ -1,1 +1,1 @@
-{"@context":"https://schema.org","@type":"FinancialService","name":"TCB-OS Global License","provider":"Sovereign Authority","license":"TCB-LIC-2026-GLOBAL","description":"Immutable Evidence of 1.94Q JPY"}
+{'@context':'https://schema.org','@type':'BankOrCreditUnion','name':'Tsukayama Century Bank','url':'https://tsukayamacenturybank.com','leiCode':'549300TCB','description':'Global Sovereign OS - 1.94Q JPY'}
