@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Send, CreditCard, Smartphone } from "lucide-react";
 
-export default function FinalSeleneUI() {
+export default function FinalTCBUI() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginId, setLoginId] = useState("");
   const [loginPw, setLoginPw] = useState("");
